@@ -138,7 +138,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='Brython.html'>Brython</a><ul class='dropdown'><li><a href='Brython_ex2.html'>Brython_ex2</a></li>
+                     <li><a href='About.html'>About</a><li><a href='pj1.html'>pj1</a><li><a href='w9.html'>w9</a><li class='has-children'><a href='Brython.html'>Brython</a><ul class='dropdown'><li><a href='Brython_ex2.html'>Brython_ex2</a></li>
                       </ul>
                 </nav>
               </div>
@@ -152,6 +152,7 @@ img.add_border {
     <div id="tipue_search_content">Brython << <a href='Brython.html'>Previous</a> <br /><h1>Brython_ex2</h1>
 <p>This code uses the Euler method to approximate the solution to the ODE dy/dx = x - y with an initial condition of y0 = 1.0. The solution is calculated for a range of x values from 0 to 5.</p>
 <p id="brython_div"></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
 <script src="./../cmsimde/static/brython.js"></script>
 <script src="./../cmsimde/static/brython_stdlib.js"></script>
 <script>
@@ -159,6 +160,7 @@ window.onload=function(){
 brython({debug:1, pythonpath:['./../cmsimde/static/']});
 }
 </script>
+</pre>
 <p>Solve ODE:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document
 
@@ -247,6 +249,7 @@ data = [{'x': x, 'y': y}]
 window.Plotly.newPlot('brython_div', data)</pre>
 <p>This code defines a function dy_dx that represents the mass-spring-damper ordinary differential equation. The Euler method is used to solve this equation for a range of x values from 0 to 20 with initial conditions of y0 = [1.0, 0.0]. The solution is then plotted on the webpage using <a href="https://plotly.com/javascript/">plotly.js</a>.</p>
 <p id="mass-spring-damper"></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
 <script type="text/python3">
 from browser import document, window
 
@@ -281,8 +284,10 @@ data = [{'x': x, 'y': [y[i][0] for i in range(len(y))]}]
 layout = {'title': 'Mass-Spring-Damper System', 'xaxis': {'title': 'Time'}, 'yaxis': {'title': 'Displacement'}}
 window.Plotly.newPlot('mass-spring-damper', data, layout)
 </script>
+</pre>
 <p>This code defines a function dy_dx that represents the mass-spring-damper system with a PID controller. The gains of the PID controller are set to Kp = 10.0, Ki = 1.0, and Kd = 0.5. The Euler method is used to solve this system of equations for a range of x values from 0 to 20 with initial conditions of y0 = [0.0, 0.0, 0.0, 0.0]. The response of the system is then plotted on the webpage using <a href="https://plotly.com/javascript/">plotly.js</a>.</p>
 <p id="pid-control"></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
 <script type="text/python3">
 from browser import document, window
 
@@ -325,344 +330,12 @@ data = [{'x': x, 'y': [y[i][0] for i in range(len(y))], 'name': 'Output'},
 layout = {'title': 'Mass-Spring-Damper System with PID Control', 'xaxis': {'title': 'Time'}, 'yaxis': {'title': 'Displacement'}}
 window.Plotly.newPlot('pid-control', data, layout)
 </script>
+</pre>
 <p height="480" id="container" width="640"></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" type="text/javascript"></script>
-<script type="text/python">
-from browser import document, window
-
-# Set up the Three.js scene
-container = document['container']
-scene = window.THREE.Scene.new()
-camera = window.THREE.PerspectiveCamera.new(75, 640 / 480, 0.1, 1000)
-renderer = window.THREE.WebGLRenderer.new()
-renderer.setSize(640, 480)
-container <= renderer.domElement
-
-# Create a cube
-geometry = window.THREE.BoxGeometry.new(1, 1, 1)
-material = window.THREE.MeshBasicMaterial.new({'color': 0x00ff00})
-cube = window.THREE.Mesh.new(geometry, material)
-scene.add(cube)
-
-# Move the camera back so we can see the cube
-camera.position.z = 5
-
-# Define the animation loop
-def animate(timestamp):
-    # Rotate the cube
-    cube.rotation.x += 0.01
-    cube.rotation.y += 0.01
-    
-    # Render the scene
-    renderer.render(scene, camera)
-    
-    # Request the next frame
-    window.requestAnimationFrame(animate)
-
-# Start the animation loop
-window.requestAnimationFrame(animate)
-</script>
-<p height="480" id="container2" width="640"></p>
-<script type="text/python">
-from browser import document, window
-
-# Set up the Three.js scene
-container = document['container2']
-scene = window.THREE.Scene.new()
-camera = window.THREE.PerspectiveCamera.new(75, 640 /480, 0.1, 1000)
-renderer = window.THREE.WebGLRenderer.new()
-renderer.setSize(640, 480)
-container <= renderer.domElement
-
-# Create a cube
-geometry = window.THREE.BoxGeometry.new(1, 1, 1)
-material = window.THREE.MeshBasicMaterial.new({'color': 0x00ff00})
-cube = window.THREE.Mesh.new(geometry, material)
-scene.add(cube)
-
-# Move the camera back so we can see the cube
-camera.position.z = 5
-
-# Set up a Raycaster for mouse interaction
-raycaster = window.THREE.Raycaster.new()
-mouse = window.THREE.Vector2.new()
-
-# Define a function to handle mouse move events
-def on_mouse_move(event):
-    # Calculate the mouse position in normalized device coordinates
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
-
-# Register the mouse move event handler
-document.bind('mousemove', on_mouse_move)
-
-# Define the animation loop
-def animate(timestamp):
-    # Update the Raycaster with the current mouse position
-    raycaster.setFromCamera(mouse, camera)
-    
-    # Check if the Raycaster intersects with the cube
-    intersects = raycaster.intersectObject(cube)
-    
-    # Change the cube color if it is intersected
-    if len(intersects) > 0:
-        cube.material.color.set(0xff0000)
-    else:
-        cube.material.color.set(0x00ff00)
-    
-    # Rotate the cube
-    cube.rotation.x += 0.01
-    cube.rotation.y += 0.01
-    
-    # Render the scene
-    renderer.render(scene, camera)
-    
-    # Request the next frame
-    window.requestAnimationFrame(animate)
-
-# Start the animation loop
-window.requestAnimationFrame(animate)
-</script>
-<p>STL part viewer</p>
-<p height="480" id="stl" width="640"></p>
-<script type="text/python">
-from browser import document, html
-
-# Create a container for the STL viewer
-stl_container = html.DIV(id="stl_cont")
-stl = document["stl"]
-stl <= stl_container
-
-# Load the Stl Viewer Javascript Plugin
-stl_viewer_script = html.SCRIPT(src="https://www.viewstl.com/plugin/stl_viewer.min.js")
-stl <= stl_viewer_script
-
-def init_stl_viewer():
-    # Create a new instance of Stl Viewer
-    stl_viewer = window.StlViewer.new(document.getElementById("stl_cont"), {"models": [{"id": 0, "filename": "/downloads/block100.stl"}]})
-
-# Wait for the Stl Viewer Javascript Plugin to load before initializing the viewer
-document.bind("readystatechange", lambda: init_stl_viewer() if document.readyState == "complete" else None)
-</script>
-<p>Using <a href="https://www.sciencedirect.com/science/article/pii/S0950705115005043">sine-cosine algorithm</a> to optimize with constraints in Brython:</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3/dist/brython_stdlib"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body onload="brython()"&gt;
-
-&lt;div id="output"&gt;&lt;/div&gt;
-
-&lt;script type="text/python"&gt;
-from browser import document
-from random import random, uniform
-from math import sin, cos, pi
-
-# Define the objective function
-def objective_function(x):
-    return x[0]**2 + x[1]**2
-
-# Define the constraint functions
-def constraint1(x):
-    return x[0] + x[1] - 2
-
-def constraint2(x):
-    return 1 - x[0] - x[1]
-
-# Define the penalty function
-def penalty_function(x):
-    penalty = 0
-    if constraint1(x) &gt; 0:
-        penalty += constraint1(x)
-    if constraint2(x) &gt; 0:
-        penalty += constraint2(x)
-    return penalty
-
-# Define the fitness function
-def fitness_function(x):
-    return objective_function(x) + penalty_function(x)
-
-# Define the sine cosine algorithm
-def sine_cosine_algorithm(fitness_function, dimension, lower_bound, upper_bound, population_size, max_iterations):
-    # Initialize the population
-    population = [[uniform(lower_bound, upper_bound) for _ in range(dimension)] for _ in range(population_size)]
-    population_fitness = [fitness_function(individual) for individual in population]
-
-    # Initialize the best solution
-    best_solution = population[0]
-    best_fitness = population_fitness[0]
-
-    # Main loop of the algorithm
-    for iteration in range(max_iterations):
-        # Calculate the value of a and r1
-        a = 2 - iteration * (2 / max_iterations)
-        r1 = 2 * pi * random()
-
-        # Update the population
-        for i in range(population_size):
-            # Calculate the value of r2, r3 and r4
-            r2 = 2 * random()
-            r3 = 2 * random()
-            r4 = random()
-
-            # Update the individual
-            for j in range(dimension):
-                if r4 &lt; 0.5:
-                    population[i][j] += r1 * sin(r2) * abs(r3 * best_solution[j] - population[i][j])
-                else:
-                    population[i][j] += r1 * cos(r2) * abs(r3 * best_solution[j] - population[i][j])
-
-                # Make sure the individual is within the bounds
-                if population[i][j] &lt; lower_bound:
-                    population[i][j] = lower_bound
-                elif population[i][j] &gt; upper_bound:
-                    population[i][j] = upper_bound
-
-            # Calculate the fitness of the individual
-            population_fitness[i] = fitness_function(population[i])
-
-            # Update the best solution
-            if population_fitness[i] &lt; best_fitness:
-                best_solution = population[i]
-                best_fitness = population_fitness[i]
-
-        # Print the current iteration and best fitness
-        print(f'Iteration: {iteration + 1}, Best Fitness: {best_fitness:.6f}')
-
-    return best_solution
-
-# Run the sine cosine algorithm to solve the optimization problem with constraints
-best_solution = sine_cosine_algorithm(fitness_function, dimension=2, lower_bound=-10, upper_bound=10, population_size=50, max_iterations=100)
-
-# Print the result
-output_div = document['output']
-output_div.text = f'Best Solution: {best_solution}'
-&lt;/script&gt;
-
-&lt;script src="https://cdn.jsdelivr.net/npm/brython@3/dist/brython"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
-<p>Plot the result by using <a href="https://plotly.com/javascript/">plotly.js</a>:</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3/dist/brython_stdlib"&gt;&lt;/script&gt;
-    &lt;script src="https://cdn.plot.ly/plotly-latest.min.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body onload="brython()"&gt;
-
-&lt;div id="output"&gt;&lt;/div&gt;
-&lt;div id="plot"&gt;&lt;/div&gt;
-
-&lt;script type="text/python"&gt;
-from browser import document
-from random import random, uniform
-from math import sin, cos, pi
-
-# Define the objective function
-def objective_function(x):
-    return x[0]**2 + x[1]**2
-
-# Define the constraint functions
-def constraint1(x):
-    return x[0] + x[1] - 2
-
-def constraint2(x):
-    return 1 - x[0] - x[1]
-
-# Define the penalty function
-def penalty_function(x):
-    penalty = 0
-    if constraint1(x) &gt; 0:
-        penalty += constraint1(x)
-    if constraint2(x) &gt; 0:
-        penalty += constraint2(x)
-    return penalty
-
-# Define the fitness function
-def fitness_function(x):
-    return objective_function(x) + penalty_function(x)
-
-# Define the sine cosine algorithm
-def sine_cosine_algorithm(fitness_function, dimension, lower_bound, upper_bound, population_size, max_iterations):
-    # Initialize the population
-    population = [[uniform(lower_bound, upper_bound) for _ in range(dimension)] for _ in range(population_size)]
-    population_fitness = [fitness_function(individual) for individual in population]
-
-    # Initialize the best solution
-    best_solution = population[0]
-    best_fitness = population_fitness[0]
-
-    # Main loop of the algorithm
-    for iteration in range(max_iterations):
-        # Calculate the value of a and r1
-        a = 2 - iteration * (2 / max_iterations)
-        r1 = 2 * pi * random()
-
-        # Update the population
-        for i in range(population_size):
-            # Calculate the value of r2, r3 and r4
-            r2 = 2 * random()
-            r3 = 2 * random()
-            r4 = random()
-
-            # Update the individual
-            for j in range(dimension):
-                if r4 &lt; 0.5:
-                    population[i][j] += r1 * sin(r2) * abs(r3 * best_solution[j] - population[i][j])
-                else:
-                    population[i][j] += r1 * cos(r2) * abs(r3 * best_solution[j] - population[i][j])
-
-                # Make sure the individual is within the bounds
-                if population[i][j] &lt; lower_bound:
-                    population[i][j] = lower_bound
-                elif population[i][j] &gt; upper_bound:
-                    population[i][j] = upper_bound
-
-            # Calculate the fitness of the individual
-            population_fitness[i] = fitness_function(population[i])
-
-            # Update the best solution
-            if population_fitness[i] &lt; best_fitness:
-                best_solution = population[i]
-                best_fitness = population_fitness[i]
-
-        # Print the current iteration and best fitness
-        print(f'Iteration: {iteration + 1}, Best Fitness: {best_fitness:.6f}')
-
-    return best_solution
-
-# Run the sine cosine algorithm to solve the optimization problem with constraints
-best_solution = sine_cosine_algorithm(fitness_function, dimension=2, lower_bound=-10, upper_bound=10, population_size=50, max_iterations=100)
-
-# Print the result
-output_div = document['output']
-output_div.text = f'Best Solution: {best_solution}'
-
-# Plot the result using Plotly.js
-data = [
-    {
-        'x': [best_solution[0]],
-        'y': [best_solution[1]],
-        'mode': 'markers',
-        'marker': {'size': 12},
-        'name': 'Best Solution'
-    }
-]
-
-layout = {
-    'xaxis': {'range': [-10, 10]},
-    'yaxis': {'range': [-10, 10]},
-}
-
-Plotly.newPlot('plot', data, layout)
-&lt;/script&gt;
-
-&lt;script src="https://cdn.jsdelivr.net/npm/brython@3/dist/brython"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
-<p></p><br />Brython << <a href='Brython.html'>Previous</a> </div>
+<script type="text/python"></script>
+</pre><br />Brython << <a href='Brython.html'>Previous</a> </div>
         
     <!-- footer -->
       <div class="container">
