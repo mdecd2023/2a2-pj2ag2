@@ -326,8 +326,60 @@ end</pre>
 <p></p>
 <p>所有檔案壓縮檔：<a href="/downloads/ag10/bubbleRob football 2a-pj1ag10.7z">bubbleRob football 2a-pj1ag10.7z</a></p>
 <h1>w9</h1>
-<p>1</p>
-<h1>Brython</h1>
+<p>4人操控 bubbleRob 利用 remote API server 錄製影片</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/8Nqbb7NHTvE" title="YouTube video player" width="560"></iframe></p>
+<p><span style="background-color: #00ffff;">remote API 程式</span></p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false"># pip install pyzmq cbor
+from zmqRemoteApi import RemoteAPIClient
+import keyboard
+import sim
+import time
+import simConst
+
+print('Program started')
+sim.simxFinish(-1) # just in case, close all openㄋed connections
+clientID=sim.simxStart('192.168.1.35',19997,True,True,5000,5)
+sim.simxStartSimulation(clientID, sim.simx_opmode_oneshot_wait)
+
+if clientID!=-1:
+    print('Connected to remote API server')
+else:
+    print('Failed connecting to remote API server')
+
+print('Simulation started')
+
+errorCode, leftMotor = sim.simxGetObjectHandle(clientID, 'leftMotor', sim.simx_opmode_oneshot_wait)
+errorCode, rightMotor = sim.simxGetObjectHandle(clientID, 'rightMotor', sim.simx_opmode_oneshot_wait)
+
+def setBubbleRobVelocity(leftWheelVelocity, rightWheelVelocity):
+    errorCode, leftMotor = sim.simxGetObjectHandle(clientID, '/leftMotor', sim.simx_opmode_oneshot_wait)
+    errorCode, rightMotor = sim.simxGetObjectHandle(clientID, '/rightMotor',sim.simx_opmode_oneshot_wait)
+    sim.simxSetJointTargetVelocity(clientID, leftMotor, leftWheelVelocity, simConst.simx_opmode_streaming)
+    sim.simxSetJointTargetVelocity(clientID, rightMotor, rightWheelVelocity, simConst.simx_opmode_streaming)
+
+'''
+# Example usage 1:
+setBubbleRobVelocity(1.0, 1.0)
+time.sleep(2)
+setBubbleRobVelocity(0.0, 0.0)
+'''
+# use keyborad to move BubbleRob
+
+while True:
+    if keyboard.is_pressed('w'):
+        setBubbleRobVelocity(2.0, 2.0)
+    elif keyboard.is_pressed('s'):
+        setBubbleRobVelocity(-2.0, -2.0)
+    elif keyboard.is_pressed('a'):
+        setBubbleRobVelocity(-2.0, 2.0)
+    elif keyboard.is_pressed('d'):
+        setBubbleRobVelocity(2.0, -2.0)
+    elif keyboard.is_pressed('q'):
+        # stop simulation
+        sim.stopSimulation()
+    else:
+        setBubbleRobVelocity(0.0, 0.0)</pre>
+<p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;">remote API 程式檔案：<a href="/downloads/bubbleRob_zmq_green_red_example.7z">bubbleRob_zmq_green_red_example.7z</a></span><br/></span></p><h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
 <h4>Examples:</h4>
 <p style="padding-left: 30px;"><a href="https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d">https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d</a></p>
