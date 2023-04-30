@@ -596,7 +596,7 @@ while True:
 <div>answer:</div>
 <div></div>
 <div><span style="background-color: #00ff00;"><strong>41023114&gt;1</strong></span></div>
-<div><span>zmqRemoteAPI</span><span> </span><span>是</span><span> </span><span>CoppeliaSim</span><span> </span><span>提供的一個用於遠端控制仿真場景的工具。它基於</span><span> </span><span>ZeroMQ</span><span> </span><span>庫實現，可以在</span><span> </span><span>Python、MATLAB、C++、Java、Octave</span><span> </span><span>等多種編程語言中使用。使用</span><span> </span><span>zmqRemoteAPI，可以通過編程控制</span><span> </span><span>CoppeliaSim</span><span> </span><span>中的機器人、傳感器、物體等各種元件，實現自動化控制、遠端操作、仿真驗證等功能。 因此，zmqRemoteAPI</span><span> </span><span>是</span><span> </span><span>CoppeliaSim</span><span> </span><span>中的一個重要功能，使得使用者可以通過編程方式控制和操作仿真場景中的各種元件，進而實現更加靈活和高效的仿真操作。</span><span> </span></div>
+<div><span>zmqRemoteAPI</span><span> </span><span>是</span><span> </span><span>CoppeliaSim</span><span> </span><span>提供的一個用於遠端控制仿真場景的工具。它基於</span><span> </span><span>ZeroMQ</span><span> </span><span>庫實現，可以在</span><span> </span><span>Python、MATLAB、C++、Java、Octave</span><span> </span><span>等多種編程語言中使用。使用</span><span> </span><span>zmqRemoteAPI，可以通過編程控制</span><span> </span><span>CoppeliaSim</span><span> </span><span>中的機器人、傳感器、物體等各種元件，實現自動化控制、遠端操作、仿真驗證等功能。 因此，zmqRemoteAPI</span><span> </span><span>是</span><span> </span><span>CoppeliaSim</span><span> </span><span>中的一個重要功能，使得使用者可以通過編程方式控制和操作仿真場景中的各種元件，進而實現更加靈活和高效的仿真操作。</span></div>
 <div><span></span></div>
 <div><span style="background-color: #00ff00;"><strong>41023119&gt;2</strong></span></div>
 <div><span>1.在</span><span> </span><span>Python</span><span> </span><span>程式中，使用相應的</span><span> </span><span>Python</span><span> </span><span>模組（例如</span><span> </span><span>PyZMQ）引入</span><span> </span><span>zmqRemoteAPI。 </span></div>
@@ -626,7 +626,7 @@ while True:
 <div><span style="background-color: #00ff00;">41023114&gt;5</span></div>
 <div><span>以下是一個使用</span><span> </span><span>CoppeliaSim</span><span> </span><span>的</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>控制機械臂自動抓取物體的</span><span> </span><span>Python</span><span> </span><span>程序 </span></div>
 <div>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">import sim import time # 定義物體的名稱和位置
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sim import time # 定義物體的名稱和位置
 object_name = 'Cuboid' object_position = [-0.2, 0.5, 0.1] # 連接 CoppeliaSim sim.simxFinish(-1) clientID = sim.simxStart('127.0.0.1', 19999, True, True, 5000, 5) 
 if clientID != -1: print('Connected to remote API server') # 取得機械臂控制句柄
 errorCode, robot_handle = sim.simxGetObjectHandle(clientID, 'UR3', sim.simx_opmode_blocking) # 取得物體控制句柄
@@ -639,7 +639,109 @@ sim.simxFinish(clientID) else: print('Failed connecting to remote API server') t
 </div>
 <div><span> 這個</span><span> </span><span>Python</span><span> </span><span>程序通過</span><span> </span><span>CoppeliaSim</span><span> </span><span>的</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>連接到</span><span> </span><span>CoppeliaSim</span><span> </span><span>仿真環境，控制機械臂移動到指定位置，夾取物體並將其移動到另一個位置，最後釋放夾爪。這個程序可以應用於機械臂自動化抓取和放置物體的項目或任務。</span><span> </span></div>
 <div><span></span></div>
+<div><span style="background-color: #00ff00;">更改及融入課程後的答案</span></div>
+<div><span style="background-color: #00ffff;">1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</span></div>
+<div></div>
+<div>answer：zmqRemoteAPI 是應用程序可以連接CoppeliaSim的幾種方式之一。<br/><br/>zmqRemoteAPI 允許從外部應用程序或遠程硬件（例如實際機器人、遠程計算機等）控制模擬（或模擬器本身）。它提供了所有API功能，這些功能也可以通過CoppeliaSim腳本使用：這包括所有常規API功能（即sim.-type函數），還包括所有API功能由插件提供（例如simOMPL。，simUI。*，simIK。*等），如果啟用的狀況下。<br/><br/>zmqRemoteAPI 函數通過 ZeroMQ 及其與 CoppeliaSim 和 zmqRemoteAPI 附加組件的接口插件與CoppeliaSim 進行交互。所有這些都是對用戶隱藏的。遠程API可以讓一個或多個外部應用程序以步進方式（即與每個模擬步驟同步）或非步進方式（即正常操作模式）與CoppeliaSim交互，甚至支持遠程控制模擬器（例如，遠程加載場景，開始、暫停或停止模擬）。<br/><br/>請參閱programming/zmqRemoteApi文件夾或其相關存儲庫以獲取示例。</div>
+<div>參考：<a href="https://www.coppeliarobotics.com/helpFiles/en/zmqRemoteApiOverview.htm">https://www.coppeliarobotics.com/helpFiles/en/zmqRemoteApiOverview.htm</a></div>
+<div></div>
+<div><span style="background-color: #00ffff;">2.How do you establish a connection between a Python script and CoppeliaSim using zmqRemoteAPI?</span></div>
+<div><span style="background-color: #00ffff;"></span></div>
+<div>answer：必須先導入 ZeroMQ 和 CBOR</div>
+<div>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">$ /path/to/python -m pip install pyzmq
+$ /path/to/python -m pip install cbor</pre>
+<p>將 Python 遠端 API 項目的位置添加到 Python 的 sys.path 或 PYTHONPATH 環境變量中也會很有幫助。</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">$ export PYTHONPATH=/path/to/zmqRemoteApi/clients/python</pre>
+<p>以下是一個非常簡單的 ZeroMQ 遠端 API 客戶端代碼示例，它會啟動模擬器並運行一個 3 秒的步進模擬：</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import time
+from zmqRemoteApi import RemoteAPIClient
+
+client = RemoteAPIClient()
+sim = client.getObject('sim')
+
+client.setStepping(True)
+
+sim.startSimulation()
+while (t := sim.getSimulationTime()) &lt; 3:
+    s = f'Simulation time: {t:.2f} [s]'
+    print(s)
+    client.step()
+sim.stopSimulation()</pre>
+<p>參考：<a href="https://www.coppeliarobotics.com/helpFiles/en/zmqRemoteApiOverview.htm">https://www.coppeliarobotics.com/helpFiles/en/zmqRemoteApiOverview.htm</a><br/><br/></p>
+</div>
+<div><span style="background-color: #00ffff;">3.What are some common use cases for zmqRemoteAPI in CoppeliaSim?</span></div>
+<div><span style="background-color: #00ffff;"></span></div>
+<div>answer：以下是從 CoppeliaSim 資料夾所提供的示範程式<span style="background-color: #00ffff;"></span></div>
+<div>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Make sure to have the server side running in CoppeliaSim:
+# in a child script of a CoppeliaSim scene, add following command
+# to be executed just once, at simulation start:
+#
+# simRemoteApi.start(19999)
+#
+# then start simulation, and run this program.
+#
+# IMPORTANT: for each successful call to simxStart, there
+# should be a corresponding call to simxFinish at the end!
+
+try:
+    import sim
+except:
+    print ('--------------------------------------------------------------')
+    print ('"sim.py" could not be imported. This means very probably that')
+    print ('either "sim.py" or the remoteApi library could not be found.')
+    print ('Make sure both are in the same folder as this file,')
+    print ('or appropriately adjust the file "sim.py"')
+    print ('--------------------------------------------------------------')
+    print ('')
+
+import time
+
+print ('Program started')
+sim.simxFinish(-1) # just in case, close all opened connections
+clientID=sim.simxStart('192.168.56.1',19997,True,True,5000,5) # Connect to CoppeliaSim
+if clientID!=-1:
+    print ('Connected to remote API server')
+
+    # Now try to retrieve data in a blocking fashion (i.e. a service call):
+    res,objs=sim.simxGetObjects(clientID,sim.sim_handle_all,sim.simx_opmode_blocking)
+    if res==sim.simx_return_ok:
+        print ('Number of objects in the scene: ',len(objs))
+    else:
+        print ('Remote API function call returned with error code: ',res)
+
+    time.sleep(2)
+
+    # Now retrieve streaming data (i.e. in a non-blocking fashion):
+    startTime=time.time()
+    sim.simxGetIntegerParameter(clientID,sim.sim_intparam_mouse_x,sim.simx_opmode_streaming) # Initialize streaming
+    while time.time()-startTime &lt; 1:
+        returnCode,data=sim.simxGetIntegerParameter(clientID,sim.sim_intparam_mouse_x,sim.simx_opmode_buffer) # Try to retrieve the streamed data
+        if returnCode==sim.simx_return_ok: # After initialization of streaming, it will take a few ms before the first value arrives, so check the return code
+            print ('Mouse position x: ',data) # Mouse position x is actualized when the cursor is over CoppeliaSim's window
+        time.sleep(0.005)
+
+    # Now send some data to CoppeliaSim in a non-blocking fashion:
+    sim.simxAddStatusbarMessage(clientID,'這個 Python remote API 將會連續執行 1 秒鐘, 歡迎進入 CoppeliaSim 的虛擬世界!',sim.simx_opmode_oneshot)
+
+    # Before closing the connection to CoppeliaSim, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
+    sim.simxGetPingTime(clientID)
+
+    # Now close the connection to CoppeliaSim:
+    sim.simxFinish(clientID)
+else:
+    print ('Failed connecting to remote API server')
+print ('Program ended')</pre>
+</div>
+<div></div>
+<div><span style="background-color: #00ffff;">5.Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</span></div>
+<div></div>
+<div>answer：以下是在課程上利用 zmqRemoteAPI 在 CoppeliaSim 中完成四人連線控制機器人之影片</div>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/8Nqbb7NHTvE" title="YouTube video player" width="560"></iframe></p>
+<div></div>
 <div><span>meeting</span></div>
+<div><span></span></div>
 <div><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/valuQHZuhA4" width="560"></iframe></span></div>
 <div><span></span></div>
 </div>
