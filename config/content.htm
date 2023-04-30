@@ -581,7 +581,6 @@ while True:
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;">控制 remote API 檔案：<a href="/downloads/bubbleRob_zmq_green_red_example.7z">bubbleRob_zmq_green_red_example.7z</a></span></span></p>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p><h1>w10</h1>
 <div>
-<div>
 <div>有關 CoppeliaSim zmqRemoteAPI 問題</div>
 <div data-tid="messageBodyContainer">
 <div data-tid="messageBodyContent">
@@ -592,6 +591,26 @@ while True:
 <li>What are the advantages and disadvantages of using zmqRemoteAPI compared to other methods of communication between Python and CoppeliaSim?</li>
 <li>Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</li>
 </ol>
+<div>有關 CoppeliaSim zmqRemoteAPI 問題 中文翻譯</div>
+<div>
+<ol>
+<li>
+<p>zmqRemoteAPI是什麼，它如何與CoppeliaSim相關聯？</p>
+</li>
+<li>
+<p>如何使用zmqRemoteAPI在Python腳本和CoppeliaSim之間建立連接？ </p>
+</li>
+<li>
+<p>在CoppeliaSim中，zmqRemoteAPI的常見用途是什麼？</p>
+</li>
+<li>
+<p>使用zmqRemoteAPI相對於其他Python和CoppeliaSim之間的通信方法有什麼優點和缺點？ </p>
+</li>
+<li>
+<p>能否舉一個使用zmqRemoteAPI在CoppeliaSim中完成的項目或任務的例子？ </p>
+</li>
+</ol>
+</div>
 <div></div>
 <div>answer:</div>
 <div></div>
@@ -604,16 +623,10 @@ while True:
 <div><span>3.通過</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>提供的函式（例如</span><span> </span><span>simxCallScriptFunction、simxGetObjectHandle</span><span> </span><span>等）向</span><span> </span><span>CoppeliaSim</span><span> </span><span>發送指令或獲取資料。 </span></div>
 <div><span>4.在</span><span> </span><span>Python</span><span> </span><span>程式中，使用</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>提供的函式（例如</span><span> </span><span>simxFinish）關閉與</span><span> </span><span>CoppeliaSim</span><span> </span><span>的連接。 簡而言之，使用</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>在</span><span> </span><span>Python</span><span> </span><span>和</span><span> </span><span>CoppeliaSim</span><span> </span><span>之間建立連接需要在</span><span> </span><span>Python</span><span> </span><span>程式中引入相應的模組、設定</span><span> </span><span>CoppeliaSim</span><span> </span><span>的</span><span> </span><span>Remote</span><span> </span><span>API</span><span> </span><span>Server、使用相應的函式建立連接、進行通訊和控制，並在連接結束時關閉連接。</span></div>
 <div><span></span></div>
-<div><span style="background-color: #00ff00;">41023126&gt;3</span></div>
-<div><span>zmqRemoteAPI</span><span> </span><span>在</span><span> </span><span>CoppeliaSim</span><span> </span><span>中的一些常見使用案例： </span></div>
-<div><span>控制機器人：使用</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>可以通過</span><span> </span><span>Python</span><span> </span><span>程式控制</span><span> </span><span>CoppeliaSim</span><span> </span><span>中的機器人模型，例如移動機器人、控制關節運動、設定感測器等。</span></div>
-<div><span> 场景设置：使用</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>可以自動化設置</span><span> </span><span>CoppeliaSim</span><span> </span><span>中的場景，例如添加物體、設定物體的位置和屬性、設置環境條件等。 </span></div>
-<div><span>效能測試：使用</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>可以進行性能測試和評估，例如測試控制算法的運行速度、記憶體使用等。 </span></div>
-<div><span>資料收集：使用</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>可以從</span><span> </span><span>CoppeliaSim</span><span> </span><span>中獲取模擬環境中的資料，例如感測器數值、物體位置、碰撞狀態等，並用於後續的資料分析和處理。 </span></div>
-<div><span>教育和研究：使用</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>可以在教育和研究領域中進行虛擬實驗、模擬場景等，幫助學生和研究人員學習和研究機器人相關的知識和技能。 </span></div>
-<div><span>簡而言之，zmqRemoteAPI</span><span> </span><span>在</span><span> </span><span>CoppeliaSim</span><span> </span><span>中常見的使用案例包括機器人控制、場景設置、效能測試、資料收集和教育研究等領域。</span></div>
+<div><strong><span style="background-color: #00ff00;">41023126&gt;3</span></strong></div>
+<div>zmqRemoteAPI 在 CoppeliaSim 中的一些常見使用案例：<br/>控制機器人：使用 zmqRemoteAPI 可以通過 Python 程式控制 CoppeliaSim 中的機器人模型，例如移動機器人、控制關節運動、設定感測器等。<br/>場景設置：使用 zmqRemoteAPI 可以自動化設置 CoppeliaSim 中的場景，例如添加物體、設定物體的位置和屬性、設置環境條件等。<br/>效能測試：使用 zmqRemoteAPI 可以進行性能測試和評估，例如測試控制算法的運行速度、記憶體使用等。<br/>資料收集：使用 zmqRemoteAPI 可以從 CoppeliaSim 中獲取模擬環境中的資料，例如感測器數值、物體位置、碰撞狀態等，並用於後續的資料分析和處理。<br/>教育和研究：使用 zmqRemoteAPI 可以在教育和研究領域中進行虛擬實驗、模擬場景等，幫助學生和研究人員學習和研究機器人相關的知識和技能。<br/>簡而言之，zmqRemoteAPI 在 CoppeliaSim 中常見的使用案例包括機器人控制、場景設置、效能測試、資料收集和教育研究等領域。</div>
 <div></div>
-<div><span style="background-color: #00ff00;">41023138&gt;4</span></div>
+<div><strong><span style="background-color: #00ff00;">41023138&gt;4</span></strong></div>
 <div><span>優點： </span></div>
 <div><span>跨平台：zmqRemoteAPI基於ZeroMQ庫實現，支持跨平台通信，因此可以輕鬆地在Windows、Mac和Linux等操作系統上使用。 </span></div>
 <div><span>高效性：zmqRemoteAPI的通信速度非常快，比其他通信方法如socket和pipe等更加高效，這對於需要快速傳輸大量數據的應用場景非常有利。 </span></div>
@@ -746,9 +759,7 @@ print ('Program ended')</pre>
 <div></div>
 <div><span>meeting</span></div>
 <div><span></span></div>
-<div><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/valuQHZuhA4" width="560"></iframe></span></div>
-<div><span></span></div>
-</div>
+<div><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/DVIoMEVhI7k" width="560"></iframe></span><span></span></div>
 </div>
 </div>
 </div><h1>note</h1>
