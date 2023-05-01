@@ -164,6 +164,7 @@ sim.simxSetObjectPosition(clientID, robot_handle, -1, target_position, sim.simx_
 sim.simxFinish(clientID) else: print('Failed connecting to remote API server') time.sleep(1)</pre>
 <p><span>這個</span><span><span> </span></span><span>Python</span><span><span> </span></span><span>程序通過</span><span><span> </span></span><span>CoppeliaSim</span><span><span> </span></span><span>的</span><span><span> </span></span><span>zmqRemoteAPI</span><span><span> </span></span><span>連接到</span><span><span> </span></span><span>CoppeliaSim</span><span><span> </span></span><span>仿真環境，控制機械臂移動到指定位置，夾取物體並將其移動到另一個位置，最後釋放夾爪。這個程序可以應用於機械臂自動化抓取和放置物體的項目或任務。</span></p>
 </div>
+<p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p>
 <br />pj2 << <a href='pj2.html'>Previous</a> <a href='41023119.html'>Next</a> >> 41023119</div>
         
     <!-- footer -->
