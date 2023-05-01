@@ -591,6 +591,7 @@ while True:
 <li>What are the advantages and disadvantages of using zmqRemoteAPI compared to other methods of communication between Python and CoppeliaSim?</li>
 <li>Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</li>
 </ol>
+<div>有關 CoppeliaSim zmqRemoteAPI 問題 中文翻譯</div>
 <div>
 <ol>
 <li>
@@ -746,6 +747,10 @@ else:
     print ('Failed connecting to remote API server')
 print ('Program ended')</pre>
 </div>
+<div><span style="background-color: #00ffff;">4.What are the advantages and disadvantages of using zmqRemoteAPI compared to other methods of communication between Python and CoppeliaSim?</span></div>
+<div><br/>answer：使用zmqRemoteAPI相比其他Python與CoppeliaSim之間的通訊方法，優點是可以讓使用者從外部應用程式或遠端硬體（如真實機器人、遠程電腦等）控制模擬（或模擬器本身），並提供了所有API函數，包括常規API函數和由插件提供的API函數（例如simOMPL、simUI、simIK等）。此外，使用zmqRemoteAPI可以讓一個或多個外部應用程式以同步或非同步方式與CoppeliaSim互動，甚至支持遠程控制模擬器。<br/><br/>缺點是使用zmqRemoteAPI需要較高的程式設計知識，而且需要較多的設置和配置才能建立連接。同時，使用zmqRemoteAPI也可能會對CoppeliaSim的效能產生一定的影響，因此在實現具體項目時需要仔細考慮使用zmqRemoteAPI是否適合。</div>
+<div></div>
+<div>以下是 Coppelia Robotics forums 中使用者在網站上提出的問題：<a href="https://forum.coppeliarobotics.com/viewtopic.php?t=9809">https://forum.coppeliarobotics.com/viewtopic.php?t=9809</a></div>
 <div></div>
 <div><span style="background-color: #00ffff;">5.Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</span></div>
 <div></div>
@@ -753,11 +758,6 @@ print ('Program ended')</pre>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/8Nqbb7NHTvE" title="YouTube video player" width="560"></iframe></p>
 <div></div>
 <div><span>meeting</span></div>
-<<<<<<< HEAD
-<div><span></span></div>
-<div><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/valuQHZuhA4" width="560"></iframe></span></div>
-=======
->>>>>>> 03a5583a20212ad33912c5d1ab49f6f2eafbd0b0
 <div><span></span></div>
 <div><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/DVIoMEVhI7k" width="560"></iframe></span><span></span></div>
 </div>
