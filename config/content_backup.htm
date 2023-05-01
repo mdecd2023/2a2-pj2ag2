@@ -3,7 +3,8 @@
 <p>組員：41023114 王樟皓、41023126 卓桓琮、41023138 林敬燐</p>
 <p>倉儲 :<span> </span><a href="https://github.com/mdecd2023/2a2-pj2ag2">https://github.com/mdecd2023/2a2-pj1ag2</a></p>
 <p>網站 : <a href="https://mdecd2023.github.io/2a2-pj2ag2/content/index.html">https://mdecd2023.github.io/2a2-pj2ag2/content/index.html</a></p>
-<p><a href="https://mde.tw/pjcopsim">https://mde.tw/pjcopsim</a></p><h1>pj1</h1>
+<p><a href="https://mde.tw/pjcopsim">https://mde.tw/pjcopsim</a></p>
+<h1>pj1</h1>
 <h2>team10</h2>
 <p>editer:<span>41023119 呂承劼 41023138 林敬燐</span></p>
 <p>3/30 已完成場地及感測器</p>
@@ -328,7 +329,6 @@ end</pre>
 <p>所有檔案壓縮檔：<a href="/downloads/ag10/bubbleRob football 2a-pj1ag10.7z">bubbleRob football 2a-pj1ag10.7z</a></p>
 <h2>team12</h2>
 <p>eidter:<span>41023114 王樟皓、41023126 卓桓琮</span></p>
-<p><strong>Process </strong></p>
 <p><span><strong>Step1</strong>:建立足球場景，透過onshape繪出足球的場景，足球分成兩部分第一部分為足球的牆壁第二部分為球門。足球的牆壁:</span><a href="https://cad.onshape.com/documents/1ef9bb78edd5251adafdfbeb/w/0699139f42c9ebc4817c6156/e/20413e231639dd10dc11bb42?renderMode=0&amp;uiState=643a420fb4776c6d78624f23">wall</a><span> 球門:</span><a href="https://cad.onshape.com/documents/a377cc4e5b1ef7cab53572bc/w/239bf2d6c24d9f9c80b7a628/e/20ebee5effb2f8812f5d7e8a?renderMode=0&amp;uiState=643a427646ce454f67f78abb">door</a></p>
 <p><span><strong>Step2</strong>:轉成STL檔匯入coppaliasim場景中，放入先前製作的bobbleRob robot，並複製兩個在場景中，加入球體 過程:<a href="https://youtu.be/Rc-BSnYI17w">https://youtu.be/Rc-BSnYI17w</a></span></p>
 <p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/Rc-BSnYI17w" width="560"></iframe></span></p>
@@ -578,7 +578,32 @@ while True:
         setBubbleRobVelocity(0.0, 0.0)</pre>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"></span></span></p>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;">控制 remote API 檔案：<a href="/downloads/bubbleRob_zmq_green_red_example.7z">bubbleRob_zmq_green_red_example.7z</a></span></span></p>
-<p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p><h2>41023114</h2>
+<p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p>
+<h2>41023114</h2>
+<p>w10</p>
+<p>1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</p>
+<p>   zmqRemoteAPI是什麼，它如何與CoppeliaSim相關聯？</p>
+<p>answer:</p>
+<p>zmqRemoteAPI 是 CoppeliaSim 提供的一個用於遠端控制仿真場景的工具。它基於 ZeroMQ 庫實現，可以在 Python、MATLAB、C++、Java、Octave 等多種編程語言中使用。使用 zmqRemoteAPI，可以通過編程控制 CoppeliaSim 中的機器人、傳感器、物體等各種元件，實現自動化控制、遠端操作、仿真驗證等功能。 因此，zmqRemoteAPI 是 CoppeliaSim 中的一個重要功能，使得使用者可以通過編程方式控制和操作仿真場景中的各種元件，進而實現更加靈活和高效的仿真操作。</p>
+<p>5.Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</p>
+<p>   能否舉一個使用zmqRemoteAPI在CoppeliaSim中完成的項目或任務的例子？ </p>
+<div><span>answer:以下是一個使用</span><span> </span><span>CoppeliaSim</span><span> </span><span>的</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>控制機械臂自動抓取物體的</span><span> </span><span>Python</span><span> </span><span>程序</span></div>
+<div></div>
+<div>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sim import time # 定義物體的名稱和位置
+object_name = 'Cuboid' object_position = [-0.2, 0.5, 0.1] # 連接 CoppeliaSim sim.simxFinish(-1) clientID = sim.simxStart('127.0.0.1', 19999, True, True, 5000, 5) 
+if clientID != -1: print('Connected to remote API server') # 取得機械臂控制句柄
+errorCode, robot_handle = sim.simxGetObjectHandle(clientID, 'UR3', sim.simx_opmode_blocking) # 取得物體控制句柄
+errorCode, object_handle = sim.simxGetObjectHandle(clientID, object_name, sim.simx_opmode_blocking) # 移動機械臂到指定位置
+target_position = [-0.2, 0.5, 0.2] sim.simxSetObjectPosition(clientID, robot_handle, -1, target_position, sim.simx_opmode_blocking) # 機械臂夾取物體 sim.simxSetObjectParent(clientID, object_handle, robot_handle, True, sim.simx_opmode_blocking) # 移動機械臂到指定位置
+sim.simxSetObjectPosition(clientID, robot_handle, -1, object_position, sim.simx_opmode_blocking) # 釋放夾爪
+sim.simxSetObjectParent(clientID, object_handle, -1, True, sim.simx_opmode_blocking) # 移動機械臂到指定位置
+sim.simxSetObjectPosition(clientID, robot_handle, -1, target_position, sim.simx_opmode_blocking) # 斷開與 CoppeliaSim 的連接
+sim.simxFinish(clientID) else: print('Failed connecting to remote API server') time.sleep(1)</pre>
+<p><span>這個</span><span><span> </span></span><span>Python</span><span><span> </span></span><span>程序通過</span><span><span> </span></span><span>CoppeliaSim</span><span><span> </span></span><span>的</span><span><span> </span></span><span>zmqRemoteAPI</span><span><span> </span></span><span>連接到</span><span><span> </span></span><span>CoppeliaSim</span><span><span> </span></span><span>仿真環境，控制機械臂移動到指定位置，夾取物體並將其移動到另一個位置，最後釋放夾爪。這個程序可以應用於機械臂自動化抓取和放置物體的項目或任務。</span></p>
+</div>
+<h2>41023119</h2>
+<h2>41023114</h2>
 <h2>41023119</h2>
 <p>4人操控 bubbleRob 利用 remote API server 錄製的影片</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/8Nqbb7NHTvE" title="YouTube video player" width="560"></iframe></p>
@@ -635,35 +660,9 @@ while True:
         setBubbleRobVelocity(0.0, 0.0)</pre>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"></span></span></p>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;">控制 remote API 檔案：<a href="/downloads/bubbleRob_zmq_green_red_example.7z">bubbleRob_zmq_green_red_example.7z</a></span></span></p>
-<<<<<<< HEAD
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p>
-<h2>41023114</h2>
-<p>w10</p>
-<p>1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</p>
-<p>   zmqRemoteAPI是什麼，它如何與CoppeliaSim相關聯？</p>
-<p>answer:</p>
-<p>zmqRemoteAPI 是 CoppeliaSim 提供的一個用於遠端控制仿真場景的工具。它基於 ZeroMQ 庫實現，可以在 Python、MATLAB、C++、Java、Octave 等多種編程語言中使用。使用 zmqRemoteAPI，可以通過編程控制 CoppeliaSim 中的機器人、傳感器、物體等各種元件，實現自動化控制、遠端操作、仿真驗證等功能。 因此，zmqRemoteAPI 是 CoppeliaSim 中的一個重要功能，使得使用者可以通過編程方式控制和操作仿真場景中的各種元件，進而實現更加靈活和高效的仿真操作。</p>
-<p>5.Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</p>
-<p>   能否舉一個使用zmqRemoteAPI在CoppeliaSim中完成的項目或任務的例子？ </p>
-<div><span>answer:以下是一個使用</span><span> </span><span>CoppeliaSim</span><span> </span><span>的</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>控制機械臂自動抓取物體的</span><span> </span><span>Python</span><span> </span><span>程序</span></div>
-<div></div>
-<div>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sim import time # 定義物體的名稱和位置
-object_name = 'Cuboid' object_position = [-0.2, 0.5, 0.1] # 連接 CoppeliaSim sim.simxFinish(-1) clientID = sim.simxStart('127.0.0.1', 19999, True, True, 5000, 5) 
-if clientID != -1: print('Connected to remote API server') # 取得機械臂控制句柄
-errorCode, robot_handle = sim.simxGetObjectHandle(clientID, 'UR3', sim.simx_opmode_blocking) # 取得物體控制句柄
-errorCode, object_handle = sim.simxGetObjectHandle(clientID, object_name, sim.simx_opmode_blocking) # 移動機械臂到指定位置
-target_position = [-0.2, 0.5, 0.2] sim.simxSetObjectPosition(clientID, robot_handle, -1, target_position, sim.simx_opmode_blocking) # 機械臂夾取物體 sim.simxSetObjectParent(clientID, object_handle, robot_handle, True, sim.simx_opmode_blocking) # 移動機械臂到指定位置
-sim.simxSetObjectPosition(clientID, robot_handle, -1, object_position, sim.simx_opmode_blocking) # 釋放夾爪
-sim.simxSetObjectParent(clientID, object_handle, -1, True, sim.simx_opmode_blocking) # 移動機械臂到指定位置
-sim.simxSetObjectPosition(clientID, robot_handle, -1, target_position, sim.simx_opmode_blocking) # 斷開與 CoppeliaSim 的連接
-sim.simxFinish(clientID) else: print('Failed connecting to remote API server') time.sleep(1)</pre>
-<p>ddd</p>
-</div><h2>41023119</h2>
 <h2>41023126</h2>
-=======
-<p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p><h2>41023126</h2>
->>>>>>> e1ea6b6602bc30d34f8a94ce5bd95615e43c00cf
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; e1ea6b6602bc30d34f8a94ce5bd95615e43c00cf</p>
 <h2>41023138</h2>
 <h1>w10</h1>
 <div>
@@ -852,6 +851,7 @@ print ('Program ended')</pre>
 <h1>note</h1>
 <p>課程筆記</p>
 <h2>stud2.cycu.org</h2>
+<p>資料連結:<a href="https://teams.microsoft.com/_#/school/ClassNotes/w5?threadId=19:a398eb1b5dc841b690f68a4e4dcefdb7@thread.tacv2&amp;ctx=channel">team-cad2022-w5</a></p>
 <p>step 1：Login to https://mail.nfu.edu.tw - 查看登入 stud2.cycu.org 伺服器的密碼, 帳號為 cd+學號, 密碼為四個字元, 包括數字與小寫英文字母，並查詢 stud.cycu.org 中與帳號對應的近端 (給 127.0.0.1 使用, 9 開頭的 port) 與遠端 (給 stud.cycu.org, 8 開頭的 port) 埠號 <br/>step 2：修改可攜 Python 3.10.6 start.bat, 蓋掉第三行後重新啟動, 目的希望將操作系統的命令搜尋路徑放在可攜目錄搜尋路徑之後. <br/>step 3：重新啟動可攜程式環境, 在其中一個命令列, ssh  cd+學號@stud2.cycu.org, 表示要使用 secure shell 遠端登入到 stud2.cycu.org, 這是一台 Linux 主機, 安裝 Ubuntu 22.04 Server.(若使用的網路連線協定並無 IPv6,  可將系統的 proxy 設為 140.130.17.4:3128 kmolab/kmolab) <br/>step 4：在 ssh 登入畫面, 以 ssh-keygen 建立 key pairs, .ssh/id_rsa 為 private key, id_rsa.pub 為 public key <br/>step 5：設法利用 Filezilla, 以 sftp 安全的(Secure)檔案(File)傳輸(Transmission)協定(Protocol), 與 stud.cycu.org 伺服器連結. <br/>step 6：利用  Filezilla sftp 取下 id_rsa.pub, 登錄至 Github 帳號下的 Setting - &gt;  SSH and GPG keys. <br/>step 7：對 server sftp 也可以利用  Filezilla portable, 以圖形介面完成. 而 ssh 也可以透過  putty.exe 執行遠端登入. <br/>step 8：接下來要下載  config 設定檔案,  以 sftp 放入 stud2.cycu.org 主機的 .ssh 目錄中. <br/>step 9：接下來要在  Ubuntu (也就是 stud.cycu.org 這台主機所安裝的操作系統) 中, 設定 .gitconfig, 總共包含三項設定: git config --global user.name "scrum-1", git config --global user.email  "scrum1@mde.tw"   以及 git config --global http.proxy http://p42.cycu.org:3128, 這三個設定必須在 ssh 登入畫面中執行, 設定完成檔案會存入帳號根目錄中的 .gitconfig  <br/>step 10：接著下載 server.py, 在 Windows 編輯 server.py, 將個人分配到的 9xxxx 埠號填入後存檔, 以 sftp 放入上列取下的倉儲根目錄. <br/>會使用的指令：<br/>pwd 代表 print working directory, clear - 清除螢幕<br/>cd - 更換目錄<br/>ls -l - 列出目錄詳細內容<br/>chmod u+x acp - 表示讓 user 可以 execute acp script (能夠讓使用者以 source acp 加上提交字串進行 git add, git commit, git push, 如何在 Windows 執行 acp.bat 加上提交字串. <br/>ps axo pid,comm,user | grep "python3" - 表示要找出使用 python3 執行的 process, 列出其 process id, command 以及 user<br/>kill -9 - 移除 python3 執行的 process id</p>
 <h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
@@ -1143,7 +1143,8 @@ doc["threejsblock"].bind("click", threejsblock.do)
 <hr/>
 <p>
 <script src="https://unpkg.com/three@0.144.0/build/three.js" type="text/javascript"></script>
-</p><h2>Brython_ex2</h2>
+</p>
+<h2>Brython_ex2</h2>
 <p>This code uses the Euler method to approximate the solution to the ODE dy/dx = x - y with an initial condition of y0 = 1.0. The solution is calculated for a range of x values from 0 to 5.</p>
 <p id="brython_div"></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
