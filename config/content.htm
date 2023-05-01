@@ -580,7 +580,28 @@ while True:
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;">控制 remote API 檔案：<a href="/downloads/bubbleRob_zmq_green_red_example.7z">bubbleRob_zmq_green_red_example.7z</a></span></span></p>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p>
 <h2>41023114</h2>
-<h2>41023119</h2>
+<p>w10</p>
+<p>1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</p>
+<p>   zmqRemoteAPI是什麼，它如何與CoppeliaSim相關聯？</p>
+<p>answer:</p>
+<p>zmqRemoteAPI 是 CoppeliaSim 提供的一個用於遠端控制仿真場景的工具。它基於 ZeroMQ 庫實現，可以在 Python、MATLAB、C++、Java、Octave 等多種編程語言中使用。使用 zmqRemoteAPI，可以通過編程控制 CoppeliaSim 中的機器人、傳感器、物體等各種元件，實現自動化控制、遠端操作、仿真驗證等功能。 因此，zmqRemoteAPI 是 CoppeliaSim 中的一個重要功能，使得使用者可以通過編程方式控制和操作仿真場景中的各種元件，進而實現更加靈活和高效的仿真操作。</p>
+<p>5.Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</p>
+<p>   能否舉一個使用zmqRemoteAPI在CoppeliaSim中完成的項目或任務的例子？ </p>
+<div><span>answer:以下是一個使用</span><span> </span><span>CoppeliaSim</span><span> </span><span>的</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>控制機械臂自動抓取物體的</span><span> </span><span>Python</span><span> </span><span>程序</span></div>
+<div></div>
+<div>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sim import time # 定義物體的名稱和位置
+object_name = 'Cuboid' object_position = [-0.2, 0.5, 0.1] # 連接 CoppeliaSim sim.simxFinish(-1) clientID = sim.simxStart('127.0.0.1', 19999, True, True, 5000, 5) 
+if clientID != -1: print('Connected to remote API server') # 取得機械臂控制句柄
+errorCode, robot_handle = sim.simxGetObjectHandle(clientID, 'UR3', sim.simx_opmode_blocking) # 取得物體控制句柄
+errorCode, object_handle = sim.simxGetObjectHandle(clientID, object_name, sim.simx_opmode_blocking) # 移動機械臂到指定位置
+target_position = [-0.2, 0.5, 0.2] sim.simxSetObjectPosition(clientID, robot_handle, -1, target_position, sim.simx_opmode_blocking) # 機械臂夾取物體 sim.simxSetObjectParent(clientID, object_handle, robot_handle, True, sim.simx_opmode_blocking) # 移動機械臂到指定位置
+sim.simxSetObjectPosition(clientID, robot_handle, -1, object_position, sim.simx_opmode_blocking) # 釋放夾爪
+sim.simxSetObjectParent(clientID, object_handle, -1, True, sim.simx_opmode_blocking) # 移動機械臂到指定位置
+sim.simxSetObjectPosition(clientID, robot_handle, -1, target_position, sim.simx_opmode_blocking) # 斷開與 CoppeliaSim 的連接
+sim.simxFinish(clientID) else: print('Failed connecting to remote API server') time.sleep(1)</pre>
+<p><span>這個</span><span><span> </span></span><span>Python</span><span><span> </span></span><span>程序通過</span><span><span> </span></span><span>CoppeliaSim</span><span><span> </span></span><span>的</span><span><span> </span></span><span>zmqRemoteAPI</span><span><span> </span></span><span>連接到</span><span><span> </span></span><span>CoppeliaSim</span><span><span> </span></span><span>仿真環境，控制機械臂移動到指定位置，夾取物體並將其移動到另一個位置，最後釋放夾爪。這個程序可以應用於機械臂自動化抓取和放置物體的項目或任務。</span></p>
+</div><h2>41023119</h2>
 <h2>41023126</h2>
 <h2>41023138</h2>
 <h1>w10</h1>
