@@ -586,7 +586,13 @@ while True:
 <div><span>機械式計分器 計分器變換方式使用<strong>馬達直接傳動</strong></span></div>
 <div><span><strong></strong></span></div>
 <div><span><strong><img alt="" height="331" src="/images/螢幕擷取畫面 2023-05-01 205446.png" width="285"/></strong></span></div>
-<h2>41023114</h2>
+<p>5/6 完成機械式記分板機構模型</p>
+<p>第一版</p>
+<p><img alt="" height="331" src="/images/記分板第一版-1.png" width="355"/></p>
+<p><img alt="" height="269" src="/images/記分板第一版-2.png" width="390"/></p>
+<p>在coppliasim中模擬放置</p>
+<p><img alt="" height="302" src="/images/記分板第一版-3.png" width="402"/></p>
+<p>程式部分正在研究及討論</p><h2>41023114</h2>
 <p>w10</p>
 <p>1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</p>
 <p>   zmqRemoteAPI是什麼，它如何與CoppeliaSim相關聯？</p>
@@ -672,14 +678,18 @@ while True:
 <p>5/1討論機械式計分器</p>
 <p>有三種方式</p>
 <p>第一種 使用凸輪機構</p>
-<p><img alt="" height="718" src="/images/螢幕擷取畫面 2023-05-01 104445.png" width="1300"/></p>
+<p><img alt="" height="377" src="/images/螢幕擷取畫面 2023-05-01 104445.png" width="683"/></p>
 <p>資料圖片來源 :<a href="https://www.instructables.com/Mechanical-Digital-Clock/">https://www.instructables.com/Mechanical-Digital-Clock/</a></p>
 <p>第二種 馬達直接傳動</p>
-<p><img alt="" height="594" src="/images/螢幕擷取畫面 2023-05-01 104049.png" width="993"/></p>
-<p>第三種 ㄇ型固定座 馬達傳動</p>
-<p><img alt="" height="658" src="/images/螢幕擷取畫面 2023-05-01 105427.png" width="1163"/></p>
+<p><img alt="" height="397" src="/images/螢幕擷取畫面 2023-05-01 104049.png" width="664"/></p>
+<p>第三種 ㄇ型固定座 馬達</p>
 <p></p>
-<h2>41023138</h2>
+<p><img alt="" height="363" src="/images/螢幕擷取畫面 2023-05-01 105427.png" width="642"/></p>
+<p>5/6 設計出機械式記分板</p>
+<p><img alt="" height="441" src="/images/記分板第一版-1.png" width="473"/></p>
+<p>利用onshape 所繪製 連結網址:<a href="https://cad.onshape.com/documents/025ed0d2004ecc2f22856170/w/0cca45e995252e3db618a8c5/e/6a3fe3ab387ef63c13128863?renderMode=0&amp;uiState=6456702e8c7fe730de23047f">scoreboard 第一版</a></p>
+<p>在coppeliasim中模擬放置</p>
+<p><img alt="" height="434" src="/images/記分板第一版-3.png" width="578"/></p><h2>41023138</h2>
 <p>w10</p>
 <p>問題:What are the advantages and disadvantages of using zmqRemoteAPI compared to other methods of communication between Python and CoppeliaSim?</p>
 <p>answer:</p>
@@ -882,17 +892,22 @@ print ('Program ended')</pre>
 <p>資料連結:<a href="https://teams.microsoft.com/_#/school/ClassNotes/w5?threadId=19:a398eb1b5dc841b690f68a4e4dcefdb7@thread.tacv2&amp;ctx=channel">team-cad2022-w5</a></p>
 <p>step 1：Login to https://mail.nfu.edu.tw - 查看登入 stud2.cycu.org 伺服器的密碼, 帳號為 cd+學號, 密碼為四個字元, 包括數字與小寫英文字母，並查詢 stud.cycu.org 中與帳號對應的近端 (給 127.0.0.1 使用, 9 開頭的 port) 與遠端 (給 stud.cycu.org, 8 開頭的 port) 埠號 <br/>step 2：修改可攜 Python 3.10.6 start.bat, 蓋掉第三行後重新啟動, 目的希望將操作系統的命令搜尋路徑放在可攜目錄搜尋路徑之後. <br/>step 3：重新啟動可攜程式環境, 在其中一個命令列, ssh  cd+學號@stud2.cycu.org, 表示要使用 secure shell 遠端登入到 stud2.cycu.org, 這是一台 Linux 主機, 安裝 Ubuntu 22.04 Server.(若使用的網路連線協定並無 IPv6,  可將系統的 proxy 設為 140.130.17.4:3128 kmolab/kmolab) <br/>step 4：在 ssh 登入畫面, 以 ssh-keygen 建立 key pairs, .ssh/id_rsa 為 private key, id_rsa.pub 為 public key <br/>step 5：設法利用 Filezilla, 以 sftp 安全的(Secure)檔案(File)傳輸(Transmission)協定(Protocol), 與 stud.cycu.org 伺服器連結. <br/>step 6：利用  Filezilla sftp 取下 id_rsa.pub, 登錄至 Github 帳號下的 Setting - &gt;  SSH and GPG keys. <br/>step 7：對 server sftp 也可以利用  Filezilla portable, 以圖形介面完成. 而 ssh 也可以透過  putty.exe 執行遠端登入. <br/>step 8：接下來要下載  config 設定檔案,  以 sftp 放入 stud2.cycu.org 主機的 .ssh 目錄中. <br/>step 9：接下來要在  Ubuntu (也就是 stud.cycu.org 這台主機所安裝的操作系統) 中, 設定 .gitconfig, 總共包含三項設定: git config --global user.name "scrum-1", git config --global user.email  "scrum1@mde.tw"   以及 git config --global http.proxy http://p42.cycu.org:3128, 這三個設定必須在 ssh 登入畫面中執行, 設定完成檔案會存入帳號根目錄中的 .gitconfig  <br/>step 10：接著下載 server.py, 在 Windows 編輯 server.py, 將個人分配到的 9xxxx 埠號填入後存檔, 以 sftp 放入上列取下的倉儲根目錄. <br/>會使用的指令：<br/>pwd 代表 print working directory, clear - 清除螢幕<br/>cd - 更換目錄<br/>ls -l - 列出目錄詳細內容<br/>chmod u+x acp - 表示讓 user 可以 execute acp script (能夠讓使用者以 source acp 加上提交字串進行 git add, git commit, git push, 如何在 Windows 執行 acp.bat 加上提交字串. <br/>ps axo pid,comm,user | grep "python3" - 表示要找出使用 python3 執行的 process, 列出其 process id, command 以及 user<br/>kill -9 - 移除 python3 執行的 process id</p>
 <h1>progress</h1>
-<p><strong>week10：</strong>製作、討論四人連線控制機器人之專案、回答 w10 之問題</p>
-<p>41023114</p>
-<p>41023119 製作四人連線機器人之場景、加入 pj2、加入 w10、修改 w10 回答</p>
-<p>41023126 加入<span>pj2、 w10的問題回答</span></p>
-<p>41023138 加入 pj2、w10、修改 w10 問題回答</p>
-<p><strong>week11：</strong>製作足球場景之計時器</p>
-<p>41023114</p>
-<p>41023119</p>
-<p>41023126 提出計時器之變動機構設計</p>
-<p>41023138</p>
-<h1>Brython</h1>
+<p><strong><span style="background-color: #ffff00;">week10</span>：</strong>製作、討論四人連線控制機器人之專案、回答 w10 之問題</p>
+<p><strong>41023114</strong></p>
+<p><strong>41023119</strong></p>
+<p>製作四人連線機器人之場景</p>
+<p>加入 pj2、加入 w10、修改 w10 回答</p>
+<p><strong>41023126</strong></p>
+<p>加入<span>pj2、 w10的問題回答</span></p>
+<p><strong>41023138</strong></p>
+<p>加入 pj2、w10、修改 w10 問題回答</p>
+<p><strong><span style="background-color: #ffff00;">week11</span>：</strong>製作足球場景之計時器</p>
+<p><strong>41023114</strong></p>
+<p><strong>41023119</strong></p>
+<p><strong>41023126</strong></p>
+<p>提出計時器之變動機構設計</p>
+<p>設計出機械式計分板第一版</p>
+<p><strong>41023138</strong></p><h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
 <h4>Examples:</h4>
 <p style="padding-left: 30px;"><a href="https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d">https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d</a></p>
