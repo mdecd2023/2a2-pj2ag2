@@ -580,7 +580,13 @@ while True:
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;">控制 remote API 檔案：<a href="/downloads/bubbleRob_zmq_green_red_example.7z">bubbleRob_zmq_green_red_example.7z</a></span></span></p>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>遇到問題：一開始本組是利用三台教室電腦及一台筆電，開始模擬時唯獨筆電無法操控 bubbleRob，後來發現網路必需都要連至同一個 Wi-Fi 才能 zmqRemoteAPI 的操控。</span></span></span></p>
 <p><span style="background-color: #00ffff;"><span style="background-color: #ffffff;"><span>5/1 </span></span></span>加入足球場景的記分板</p>
-<div>因為在連線中，軟件中的計分板，分數無法顯示在連線的雙方的螢幕上，因此要加入機械式的記分板，以顯示在雙方的得分數在連線的螢幕上。</div>
+<div>因為在連線中，軟件中的計分板，分數無法顯示在連線的雙方的螢幕上，因此要加入的記分板，以顯示在雙方的得分數在連線的螢幕上。</div>
+<div></div>
+<div>經過討論本組所可執行的方案有兩種</div>
+<div>1.利用機械式使用馬達直接傳動</div>
+<div>2.利用程式控制顏色改變計分板分數</div>
+<div></div>
+<div>以下是利用機械式紀分板</div>
 <div></div>
 <div><span>機械式計分器 計分器變換方式使用<strong>馬達直接傳動</strong></span></div>
 <div><span><strong></strong></span></div>
@@ -591,7 +597,10 @@ while True:
 <p><img alt="" height="269" src="/images/記分板第一版-2.png" width="390"/></p>
 <p>在coppliasim中模擬放置</p>
 <p><img alt="" height="302" src="/images/記分板第一版-3.png" width="402"/></p>
-<p>程式部分正在研究及討論</p><h2>41023114</h2>
+<p>程式部分正在研究及討論</p>
+<p>5/8 經過討論後機械式計分板所需程式太過繁瑣，所以參考七段顯示器的概念修改計時器為顏色控制</p>
+<p>記分板 prt 檔及 stl 檔：<a href="/downloads/score1.prt">score1.prt</a>、<a href="/downloads/score1_1.stl">score1_1.stl</a></p>
+<p><img alt="" height="405" src="/images/football/picture1.png" width="720"/></p><h2>41023114</h2>
 <p>w10</p>
 <p>1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</p>
 <p>   zmqRemoteAPI是什麼，它如何與CoppeliaSim相關聯？</p>
