@@ -220,7 +220,79 @@ while True:
 <p>5/8 經過討論後機械式計分板所需程式太過繁瑣，所以參考七段顯示器的概念修改計時器為顏色控制</p>
 <p>記分板 prt 檔及 stl 檔：<a href="./../downloads/score1.prt">score1.prt</a>、<a href="./../downloads/score1_1.stl">score1_1.stl</a></p>
 <p>以下是圖片效果展示</p>
-<p><img alt="" height="405" src="./../images/football/picture1.png" width="720"/></p><br />team12 << <a href='team12.html'>Previous</a> <a href='41023114.html'>Next</a> >> 41023114</div>
+<p><img alt="" height="405" src="./../images/football/picture1.png" width="720"/></p>
+<p>5/10 進球後可以控制個位數記分板更改分數</p>
+<p>以下是程式註解及影片</p>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    scorewallb = 0  -- 累計分數 b
+    scorewalla = 0  -- 累計分數 a
+    sensor = sim.getObject('./sensor')  -- 感測器物件
+    bubbleRob = sim.getObject('/bubbleRob')  -- 機器人物件
+    ball = sim.getObject('/ball')  -- 球物件
+    bubbleRob2 = sim.getObject('/bubbleRob2')  -- 第二個機器人物件
+    initialPosition = sim.getObjectPosition(bubbleRob, -1)  -- 機器人的初始位置
+    initialOrientation = sim.getObjectOrientation(bubbleRob, -1)  -- 機器人的初始姿態
+    initialPosition2 = sim.getObjectPosition(bubbleRob2, -1)  -- 第二個機器人的初始位置
+    initialOrientation2 = sim.getObjectOrientation(bubbleRob2, -1)  -- 第二個機器人的初始姿態
+    initialballPosition = sim.getObjectPosition(ball, -1)  -- 球的初始位置
+    initialballOrientation = sim.getObjectOrientation(ball, -1)  -- 球的初始姿態
+    
+    -- 分數的設定
+    score0={1,1,1,0,1,1,1}
+    score1={0,0,1,0,0,1,0}
+    score2={1,0,1,1,1,0,1}
+    score3={1,0,1,1,0,1,1}
+    score4={0,1,1,1,0,1,0}
+    score5={1,1,0,1,0,1,1}
+    score6={1,1,0,1,1,1,1}
+    score7={1,0,1,0,0,1,0}
+    score8={1,1,1,1,1,1,1}
+    score9={1,1,1,1,0,1,1}
+    score={score0,score1,score2,score3,score4,score5,score6,score7,score8,score9}
+    
+    -- 設定每個計分牆的顏色
+    for j = 0,6,1 do
+        local scoreb = sim.getObject('./scoreb['..j..']')
+        -- 如果 score[1][j+1] 等於 1，將計分牆設定為紅色；否則設定為白色
+        if (score[1][j+1]==1) then
+            sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+        else
+            sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+        end
+    end
+end
+
+function sysCall_actuation()
+    result=sim.readProximitySensor(sensor)  -- 讀取感測器的結果
+    if(scorewallb&lt;9)then
+        if(result&gt;0)then
+            score2 = scorewallb+1  -- 更新分數
+            -- 判斷分數並更新計分牆的顏色
+            for i= 0,9,1 do
+                if (score2 == i)then
+                    for j = 0,6,1 do
+                        local scoreb = sim.getObject('./scoreb['..j..']')
+                        -- 如果 score[i+1][j+1] 等於 1，將計分牆設定為紅色；否則設定為白色
+                        if (score[i+1][j+1]==1) then
+                            sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+                        else
+                            sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+                        end
+                    end
+                end
+            end
+            --sim.pauseSimulation()
+            scorewallb=score2  -- 更新累計分數
+            sim.setObjectPosition(ball, -1, initialballPosition)  -- 重置球的位置
+            sim.setObjectOrientation(ball, -1, initialballOrientation)  -- 重置球的姿態
+        end
+    else
+        sim.pauseSimulation()  -- 暫停模擬
+    end
+end</pre>
+<p></p>
+<p></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/S5cWPZzXmrs" title="YouTube video player" width="560"></iframe></p><br />team12 << <a href='team12.html'>Previous</a> <a href='41023114.html'>Next</a> >> 41023114</div>
         
     <!-- footer -->
       <div class="container">

@@ -214,7 +214,7 @@ sim.simxFinish(clientID) else: print('Failed connecting to remote API server') t
 </div>
 <div><span> 這個</span><span> </span><span>Python</span><span> </span><span>程序通過</span><span> </span><span>CoppeliaSim</span><span> </span><span>的</span><span> </span><span>zmqRemoteAPI</span><span> </span><span>連接到</span><span> </span><span>CoppeliaSim</span><span> </span><span>仿真環境，控制機械臂移動到指定位置，夾取物體並將其移動到另一個位置，最後釋放夾爪。這個程序可以應用於機械臂自動化抓取和放置物體的項目或任務。</span><span> </span></div>
 <div><span></span></div>
-<div><span style="background-color: #00ff00;">更改及融入課程後的答案</span></div>
+<div><span style="background-color: #00ff00;">更改及融入課程後的答案 由41023119 呂承劼製作<br/></span></div>
 <div><span style="background-color: #00ffff;">1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</span></div>
 <div></div>
 <div>answer：zmqRemoteAPI 是應用程序可以連接CoppeliaSim的幾種方式之一。<br/><br/>zmqRemoteAPI 允許從外部應用程序或遠程硬件（例如實際機器人、遠程計算機等）控制模擬（或模擬器本身）。它提供了所有API功能，這些功能也可以通過CoppeliaSim腳本使用：這包括所有常規API功能（即sim.-type函數），還包括所有API功能由插件提供（例如simOMPL。，simUI。*，simIK。*等），如果啟用的狀況下。<br/><br/>zmqRemoteAPI 函數通過 ZeroMQ 及其與 CoppeliaSim 和 zmqRemoteAPI 附加組件的接口插件與CoppeliaSim 進行交互。所有這些都是對用戶隱藏的。遠程API可以讓一個或多個外部應用程序以步進方式（即與每個模擬步驟同步）或非步進方式（即正常操作模式）與CoppeliaSim交互，甚至支持遠程控制模擬器（例如，遠程加載場景，開始、暫停或停止模擬）。<br/><br/>請參閱programming/zmqRemoteApi文件夾或其相關存儲庫以獲取示例。</div>
@@ -324,8 +324,7 @@ print ('Program ended')</pre>
 <div><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/DVIoMEVhI7k" width="560"></iframe></span><span></span></div>
 </div>
 </div>
-</div>
-<br />41023138 << <a href='41023138.html'>Previous</a> <a href='note.html'>Next</a> >> note</div>
+</div><br />41023138 << <a href='41023138.html'>Previous</a> <a href='note.html'>Next</a> >> note</div>
         
     <!-- footer -->
       <div class="container">
