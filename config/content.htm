@@ -5,7 +5,8 @@
 <p>網站 : <a href="https://mdecd2023.github.io/2a2-pj2ag2/content/index.html">https://mdecd2023.github.io/2a2-pj2ag2/content/index.html</a></p>
 <p><a href="https://mde.tw/pjcopsim">https://mde.tw/pjcopsim</a></p>
 <h1>pj1</h1>
-<p>w1-w9 pj1ag 各組製作之足球場景</p><h2>team10</h2>
+<p>w1-w9 pj1ag 各組製作之足球場景</p>
+<h2>team10</h2>
 <p>editor:<span>41023119 呂承劼 41023138 林敬燐</span></p>
 <p>3/30 已完成場地及感測器</p>
 <p><img alt="" height="405" src="/downloads/ag10/20230330.png" width="720"/></p>
@@ -326,7 +327,8 @@ function sysCall_actuation()
     end
 end</pre>
 <p></p>
-<p>所有檔案壓縮檔：<a href="/downloads/ag10/bubbleRob football 2a-pj1ag10.7z">bubbleRob football 2a-pj1ag10.7z</a></p><h2>team12</h2>
+<p>所有檔案壓縮檔：<a href="/downloads/ag10/bubbleRob football 2a-pj1ag10.7z">bubbleRob football 2a-pj1ag10.7z</a></p>
+<h2>team12</h2>
 <p>editor:<span>41023114 王樟皓、41023126 卓桓琮</span></p>
 <p><span><strong>Step1</strong>:建立足球場景，透過onshape繪出足球的場景，足球分成兩部分第一部分為足球的牆壁第二部分為球門。足球的牆壁:</span><a href="https://cad.onshape.com/documents/1ef9bb78edd5251adafdfbeb/w/0699139f42c9ebc4817c6156/e/20413e231639dd10dc11bb42?renderMode=0&amp;uiState=643a420fb4776c6d78624f23">wall</a><span> 球門:</span><a href="https://cad.onshape.com/documents/a377cc4e5b1ef7cab53572bc/w/239bf2d6c24d9f9c80b7a628/e/20ebee5effb2f8812f5d7e8a?renderMode=0&amp;uiState=643a427646ce454f67f78abb">door</a></p>
 <p><span><strong>Step2</strong>:轉成STL檔匯入coppaliasim場景中，放入先前製作的bobbleRob robot，並複製兩個在場景中，加入球體 過程:<a href="https://youtu.be/Rc-BSnYI17w">https://youtu.be/Rc-BSnYI17w</a></span></p>
@@ -679,12 +681,129 @@ end</pre>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/S5cWPZzXmrs" title="YouTube video player" width="560"></iframe></p>
 <p>經過程式編譯可以更新十位數及個位數記分板分數，而以下是程式註解及影片</p>
 <p></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/PTypbITJJG4" title="YouTube video player" width="560"></iframe></p>
 <p></p>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    scorewallb = 0  -- 分數牆B的初始分數為0
+    scorewalla = 0  -- 分數牆A的初始分數為0
+    sensor = sim.getObject('./sensor')  -- 取得感應器的句柄
+    bubbleRob = sim.getObject('/bubbleRob')  -- 取得機器人1的句柄
+    ball = sim.getObject('/ball')  -- 取得球的句柄
+    bubbleRob2 = sim.getObject('/bubbleRob2')  -- 取得機器人2的句柄
+    initialPosition = sim.getObjectPosition(bubbleRob, -1)  -- 取得機器人1的初始位置
+    initialOrientation = sim.getObjectOrientation(bubbleRob, -1)  -- 取得機器人1的初始姿態
+    initialPosition2 = sim.getObjectPosition(bubbleRob2, -1)  -- 取得機器人2的初始位置
+    initialOrientation2 = sim.getObjectOrientation(bubbleRob2, -1)  -- 取得機器人2的初始姿態
+    initialballPosition = sim.getObjectPosition(ball, -1)  -- 取得球的初始位置
+    initialballOrientation = sim.getObjectOrientation(ball, -1)  -- 取得球的初始姿態
+
+    -- 分數牆顯示的數字0~9的顏色設定
+    score0 = {1, 1, 1, 0, 1, 1, 1}
+    score1 = {0, 0, 1, 0, 0, 1, 0}
+    score2 = {1, 0, 1, 1, 1, 0, 1}
+    score3 = {1, 0, 1, 1, 0, 1, 1}
+    score4 = {0, 1, 1, 1, 0, 1, 0}
+    score5 = {1, 1, 0, 1, 0, 1, 1}
+    score6 = {1, 1, 0, 1, 1, 1, 1}
+    score7 = {1, 0, 1, 0, 0, 1, 0}
+    score8 = {1, 1, 1, 1, 1, 1, 1}
+    score9 = {1, 1, 1, 1, 0, 1, 1}
+    score = {score0, score1, score2, score3, score4, score5, score6, score7, score8, score9}
+
+    -- 初始化分數牆A的顯示顏色
+for j = 0, 6, 1 do
+    local scorea = sim.getObject('./scorea[' .. j .. ']')
+
+    -- 檢查分數牆A對應的分數是否為1
+    if (score[1][j+1]==1) then
+        sim.setShapeColor(scorea, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0}) -- 將形狀的顏色設定為紅色
+    else
+        sim.setShapeColor(scorea, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1}) -- 將形狀的顏色設定為白色
+    end
+end
+    -- 初始化分數牆B的顯示顏色
+for j = 0, 6, 1 do
+    local scoreb = sim.getObject('./scoreb[' .. j .. ']')
+
+    -- 檢查分數牆B對應的分數是否為1
+    if (score[1][j+1]==1) then
+        sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0}) -- 將形狀的顏色設定為紅色
+    else
+        sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1}) -- 將形狀的顏色設定為白色
+    end
+end
+
+function sysCall_actuation()
+    result = sim.readProximitySensor(sensor)  -- 讀取接近傳感器的值
+
+    -- 檢查分數牆B的分數是否小於10
+    if scorewallb &lt; 10 then
+        -- 如果接近傳感器的值大於0，就執行以下程式
+        if result &gt; 0 then
+            score2 = scorewallb + 1  -- 更新分數牆B的分數
+
+            -- 檢查新的分數對應的形狀顏色
+            for i = 0, 9, 1 do
+                if score2 == i then
+                    -- 更新分數牆B的形狀顏色
+                    for j = 0, 6, 1 do
+                        local scoreb = sim.getObject('./scoreb[' .. j .. ']')
+                        if score[i + 1][j + 1] == 1 then
+                            sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0}) -- 將形狀的顏色設定為紅色
+                        else
+                            sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1}) -- 將形狀的顏色設定為白色
+                        end
+                    end
+                end
+            end
+
+            scorewallb = score2  -- 更新分數牆B的分數
+            sim.setObjectPosition(ball, -1, initialballPosition) -- 將球的位置重設為初始位置
+            sim.setObjectOrientation(ball, -1, initialballOrientation) -- 將球的方向重設為初始方向
+        end
+    else
+        scorewallb = 0  -- 如果分數牆B的分數達到9，則將分數牆B的分數重設為0
+
+        -- 更新分數牆B的形狀顏色
+        for j = 0, 6, 1 do
+            local scoreb = sim.getObject('./scoreb[' .. j .. ']')
+            if score0[j + 1] == 1 then
+                sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0}) -- 將形狀的顏色設定為紅色
+            else
+                sim.setShapeColor(scoreb, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1}) -- 將形狀的顏色設定為白色
+            end
+        end
+
+        score3 = scorewalla + 1  -- 更新分數牆A的分數
+
+    -- 更新分數牆A的形狀顏色
+        for i = 0, 9, 1 do
+          if score3 == i then
+            for j = 0, 6, 1 do
+                local scorea = sim.getObject('./scorea[' .. j .. ']')
+                if score[i + 1][j + 1] == 1 then
+                    sim.setShapeColor(scorea, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0}) -- 將 scorea 物體的顏色設置為紅色
+                else
+                    sim.setShapeColor(scorea, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1}) -- 將 scorea 物體的顏色設置為白色
+                end
+            end
+          end
+        end
+        scorewalla = score3 -- 將 scorewalla 變數的值設置為 score3 的值
+        sim.setObjectPosition(ball, -1, initialballPosition) -- 將 ball 物體的位置設置為初始位置
+        sim.setObjectOrientation(ball, -1, initialballOrientation) -- 將 ball 物體的方向設置為初始方向
+
+    -- 如果 scorewallb 和 scorewalla 都等於 9，則暫停仿真
+    if scorewallb == 9 and scorewalla == 9 then
+        sim.pauseSimulation()
+    end
+end</pre>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/PTypbITJJG4" title="YouTube video player" width="560"></iframe></p>
 <p>5/14 增加機械式計分機構 第二版</p>
 <p>嘗試用更簡單的機構 去計分 做動及程式模擬正在嘗試中</p>
 <p><img alt="" height="258" src="/images/記分板第二版.png" width="271"/> </p>
-<p>onshape:<a href="https://cad.onshape.com/documents/20e54dcb49357836da0663d7/w/1aa0c53b67050eb015447105/e/d73c2e9a8090e7b97b240be3?renderMode=0&amp;uiState=6460f5c80560f6122cf5ec71">scoreboard2</a></p><h2>41023114</h2>
+<p>onshape:<a href="https://cad.onshape.com/documents/20e54dcb49357836da0663d7/w/1aa0c53b67050eb015447105/e/d73c2e9a8090e7b97b240be3?renderMode=0&amp;uiState=6460f5c80560f6122cf5ec71">scoreboard2</a></p>
+<h2>41023114</h2>
 <p>w10</p>
 <p>1.What is zmqRemoteAPI, and how does it relate to CoppeliaSim?</p>
 <p>   zmqRemoteAPI是什麼，它如何與CoppeliaSim相關聯？</p>
@@ -870,7 +989,8 @@ print ('Program ended')</pre>
 <div><span style="background-color: #00ffff;">5.Can you give an example of a project or task that you could complete using zmqRemoteAPI in CoppeliaSim?</span></div>
 <div></div>
 <div>answer：以下是在課程上利用 zmqRemoteAPI 在 CoppeliaSim 中完成四人連線控制機器人之影片</div>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/8Nqbb7NHTvE" title="YouTube video player" width="560"></iframe></p><h2>41023126</h2>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/8Nqbb7NHTvE" title="YouTube video player" width="560"></iframe></p>
+<h2>41023126</h2>
 <p>5/1討論機械式計分器</p>
 <p>有三種方式</p>
 <p>第一種 使用凸輪機構</p>
@@ -887,7 +1007,8 @@ print ('Program ended')</pre>
 <p>在coppeliasim中模擬放置</p>
 <p><img alt="" height="434" src="/images/記分板第一版-3.png" width="578"/></p>
 <p>5/14新增機械式計分器 第二版</p>
-<p><img alt="" height="603" src="/images/記分板第二版.png" width="634"/></p><h2>41023138</h2>
+<p><img alt="" height="603" src="/images/記分板第二版.png" width="634"/></p>
+<h2>41023138</h2>
 <p>w10</p>
 <p>問題:What are the advantages and disadvantages of using zmqRemoteAPI compared to other methods of communication between Python and CoppeliaSim?</p>
 <p>answer:</p>
@@ -1083,7 +1204,8 @@ print ('Program ended')</pre>
 <div><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/DVIoMEVhI7k" width="560"></iframe></span><span></span></div>
 </div>
 </div>
-</div><h1>note</h1>
+</div>
+<h1>note</h1>
 <p>課程筆記</p>
 <h2>stud2.cycu.org</h2>
 <p>資料連結:<a href="https://teams.microsoft.com/_#/school/ClassNotes/w5?threadId=19:a398eb1b5dc841b690f68a4e4dcefdb7@thread.tacv2&amp;ctx=channel">team-cad2022-w5</a></p>
@@ -1091,6 +1213,7 @@ print ('Program ended')</pre>
 <h1>progress</h1>
 <p><strong><span style="background-color: #ffff00;">week10</span>：</strong>製作、討論四人連線控制機器人之專案、回答 w10 之問題</p>
 <p><strong>41023114</strong></p>
+<p>加入 pj2、加入 w10、回答 w10 回答</p>
 <p><strong>41023119</strong></p>
 <p>製作四人連線機器人之場景</p>
 <p>加入 pj2、加入 w10、修改 w10 回答</p>
@@ -1100,6 +1223,7 @@ print ('Program ended')</pre>
 <p>加入 pj2、w10、修改 w10 問題回答</p>
 <p><strong><span style="background-color: #ffff00;">week11</span>：</strong>製作足球場景之計時器</p>
 <p><strong>41023114</strong></p>
+<p><strong>討論計數器外型</strong></p>
 <p><strong>41023119</strong></p>
 <p>設計顏色計分板及編寫記分板程式</p>
 <p><strong>41023126</strong></p>
